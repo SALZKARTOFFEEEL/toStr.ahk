@@ -17,6 +17,9 @@ toStr(val) {
     if (type(val) == "BoundFunc") {
       return "'Bound Func Object'"
     }
+    if (type(val) == "File") {
+      return "'File Object' of file <" _fileObjGetPath(val) ">"
+    }
   }
   else if (type(val) == "Integer") {
     return format("{:i}", val)
@@ -40,5 +43,33 @@ toStr(val) {
         return false
     }
     return true
+  }
+
+  ; https://docs.microsoft.com/windows/desktop/api/fileapi/nf-fileapi-getfinalpathnamebyhandlew
+  _fileObjGetPath(fileObj) {
+    hFile := fileObj.handle
+  , varSetCapacity(lpszFilePath, 260 * 2 + 1) ; 260 is the default MAX_PATH
+  , cchFilePath := 260 * 2                    ; 
+  , dwFlags := 0x0 ; FILE_NAME_NORMALIZED | VOLUME_NAME_DOS
+  , ret := dllCall("GetFinalPathNameByHandleW", "Ptr", hFile, "Str", lpszFilePath, "UInt", cchFilePath, "UInt", dwFlags)
+    
+    if (ret > 260 * 2) { ; the buffer size of 260 was too small
+      varSetCapacity(lpszFilePath, ret)
+    , cchFilePath := ret - 1
+    , dllCall("GetFinalPathNameByHandleW", "Ptr", hFile, "Str", lpszFilePath, "UInt", cchFilePath, "UInt", dwFlags)
+    }
+
+    return _cutUncPrefix(lpszFilePath)
+
+    ; https://docs.microsoft.com/windows/desktop/fileio/naming-a-file#maximum-path-length-limitation
+    _cutUncPrefix(path) {
+      if (inStr(path, "\\?\UNC\") == 1) {
+        return subStr(path, 9)
+      } else if (inStr(path, "\\?\") == 1) {
+        return subStr(path, 5)
+      } else {
+        return path
+      }
+    }
   }
 }
