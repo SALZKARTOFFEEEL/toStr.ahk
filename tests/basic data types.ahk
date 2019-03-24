@@ -15,3 +15,5 @@ output(vals*) {
 output("abcdefg", "")
 output(123456789, 0)
 output(-123.4567, 0.0)
+output([1, 2, 3], [])
+output({a: "1", b: 2}, {})
