@@ -15,3 +15,4 @@ output(vals*) {
 output(func("toStr"))
 output(func("toStr").bind("abc"))
 output(fileOpen(A_ScriptFullPath, "r"))
+output(gui := guiCreate(, "test"))

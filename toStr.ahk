@@ -20,6 +20,9 @@ toStr(val) {
     if (type(val) == "File") {
       return "'File Object' of file <" _fileObjGetPath(val) ">"
     }
+    if (type(val) == "Gui") {
+      return "'Gui Object' of GUI <" (val.name || val.title) ">"
+    }
   }
   else if (type(val) == "Integer") {
     return format("{:i}", val)
