@@ -14,6 +14,9 @@ toStr(val) {
     if (type(val) == "Func") {
       return "'Func Object' of function <" val.name ">"
     }
+    if (type(val) == "BoundFunc") {
+      return "'Bound Func Object'"
+    }
   }
   else if (type(val) == "Integer") {
     return format("{:i}", val)

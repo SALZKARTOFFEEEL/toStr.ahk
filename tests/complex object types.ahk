@@ -13,3 +13,4 @@ output(vals*) {
 
 
 output(func("toStr"))
+output(func("toStr").bind("abc"))
