@@ -23,6 +23,9 @@ toStr(val) {
     if (type(val) == "Gui") {
       return "'Gui Object' of GUI <" (val.name || val.title) ">"
     }
+    if (type(val) == "Menu") {
+      return "'Menu Object' with <" _menuObjGetItemCount(val) "> items"
+    }
   }
   else if (type(val) == "Integer") {
     return format("{:i}", val)
@@ -74,5 +77,9 @@ toStr(val) {
         return path
       }
     }
+  }
+
+  _menuObjGetItemCount(menuObj) {
+    return dllCall("GetMenuItemCount", "Ptr", menuObj.handle)
   }
 }
