@@ -79,6 +79,7 @@ toStr(val) {
     }
   }
 
+  ; https://docs.microsoft.com/windows/desktop/api/Winuser/nf-winuser-getmenuitemcount
   _menuObjGetItemCount(menuObj) {
     return dllCall("GetMenuItemCount", "Ptr", menuObj.handle)
   }
