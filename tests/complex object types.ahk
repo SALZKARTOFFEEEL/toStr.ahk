@@ -7,7 +7,7 @@ output(vals*) {
 	for i, val in vals {
 		stdout.writeLine(toStr(val))
 	}
-	stdout.Close()
+	stdout.close()
 }
 
 
