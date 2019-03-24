@@ -11,6 +11,9 @@ toStr(val) {
         return "{" . subStr(output, 1, -2) . "}"
       }
     }
+    if (type(val) == "Func") {
+      return "'Func Object' of function <" val.name ">"
+    }
   }
   else if (type(val) == "Integer") {
     return format("{:i}", val)
