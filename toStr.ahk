@@ -29,6 +29,9 @@ toStr(val) {
     if (type(val) == "MenuBar") {
       return "'Menu Bar Object' with <" _menubarObjGetMenuCount(val) "> menus"
     }
+    if (type(val) == "ComObj") {
+      return "'Com Object'"
+    }
 
 
     ; following parts should be kept at the end of this function,
@@ -41,6 +44,12 @@ toStr(val) {
       return "'Gui Control Object' for <" _guictrlObjGetType(val) "> control "
       . "on GUI <" _guiObjGetName(_guictrlObjGetGui(val)) ">"
     }
+    ; this check is extremely slow (takes around 50 ms on my system),
+    ; it will potentially get removed, but stays as the last check, for now.
+    if (type(val) == comObjType(val, "class")) { ; val is a COM object created with comObjCreate()
+      return "'Com Object' of name <" comObjType(val, "name") "> and class <" type(val) ">"
+    }
+
 
     return "Object of type <" type(val) ">"
   }
@@ -124,5 +133,9 @@ toStr(val) {
   ; this function is really just for explicity
   _menubarObjGetMenuCount(menubarObj) {
     return dllCall("GetMenuItemCount", "Ptr", menubarObj.handle)
+  }
+
+  _comObjGetName(comObj) {
+    return comObjType(comObj, "Name")
   }
 }
