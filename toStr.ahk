@@ -34,6 +34,9 @@ toStr(val) {
     ; following parts should be kept at the end of this function,
     ; because their performance is relatively poor
 
+    if (subStr(type(val), -11) == ".Enumerator") {
+      return "'Enumerator Object' for <" subStr(type(val), 1, -11) ">"
+    }
     if (subStr(type(val), 1, 3) == "Gui") {
       return "'Gui Control Object' for <" _guictrlObjGetType(val) "> control "
       . "on GUI <" _guiObjGetName(_guictrlObjGetGui(val)) ">"
