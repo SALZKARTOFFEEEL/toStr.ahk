@@ -12,7 +12,7 @@ toStr(val) {
       }
     }
     if (type(val) == "Func") {
-      return "'Func Object' of function <" val.name ">"
+      return "'Func Object' of function <" _funcObjGetName(val) ">"
     }
     if (type(val) == "BoundFunc") {
       return "'Bound Func Object'"
@@ -49,6 +49,10 @@ toStr(val) {
         return false
     }
     return true
+  }
+
+  _funcObjGetName(funcObj) {
+    return funcObj.name
   }
 
   ; https://docs.microsoft.com/windows/desktop/api/fileapi/nf-fileapi-getfinalpathnamebyhandlew
