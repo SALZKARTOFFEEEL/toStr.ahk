@@ -134,8 +134,4 @@ toStr(val) {
   _menubarObjGetMenuCount(menubarObj) {
     return dllCall("GetMenuItemCount", "Ptr", menubarObj.handle)
   }
-
-  _comObjGetName(comObj) {
-    return comObjType(comObj, "Name")
-  }
 }
