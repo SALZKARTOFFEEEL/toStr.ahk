@@ -31,6 +31,14 @@ toStr(val) {
     }
 
 
+    ; following parts should be kept at the end of this function,
+    ; because their performance is relatively poor
+
+    if (subStr(type(val), 1, 3) == "Gui") {
+      return "'Gui Control Object' for <" _guictrlObjGetType(val) "> control "
+      . "on GUI <" _guiObjGetName(_guictrlObjGetGui(val)) ">"
+    }
+
     return "Object of type <" type(val) ">"
   }
   else if (type(val) == "Integer") {
@@ -94,6 +102,14 @@ toStr(val) {
       return guiObj.name
     if (guiObj.title !== "")
       return guiObj.title
+  }
+
+  _guictrlObjGetType(guictrlObj) {
+    return guictrlObj.type
+  }
+
+  _guictrlObjGetGui(guictrlObj) {
+    return guictrlObj.gui
   }
 
   ; https://docs.microsoft.com/windows/desktop/api/Winuser/nf-winuser-getmenuitemcount
