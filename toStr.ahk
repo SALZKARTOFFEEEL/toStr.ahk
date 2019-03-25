@@ -21,7 +21,7 @@ toStr(val) {
       return "'File Object' of file <" _fileObjGetPath(val) ">"
     }
     if (type(val) == "Gui") {
-      return "'Gui Object' of GUI <" (val.name || val.title) ">"
+      return "'Gui Object' of GUI <" _guiObjGetName(val) ">"
     }
     if (type(val) == "Menu") {
       return "'Menu Object' with <" _menuObjGetItemCount(val) "> items"
@@ -81,6 +81,13 @@ toStr(val) {
         return path
       }
     }
+  }
+
+  _guiObjGetName(guiObj) {
+    if (guiObj.name !== "")
+      return guiObj.name
+    if (guiObj.title !== "")
+      return guiObj.title
   }
 
   ; https://docs.microsoft.com/windows/desktop/api/Winuser/nf-winuser-getmenuitemcount
