@@ -26,6 +26,9 @@ toStr(val) {
     if (type(val) == "Menu") {
       return "'Menu Object' with <" _menuObjGetItemCount(val) "> items"
     }
+    if (type(val) == "MenuBar") {
+      return "'Menu Bar Object' with <" _menubarObjGetMenuCount(val) "> menus"
+    }
 
 
     return "Object of type <" type(val) ">"
@@ -96,5 +99,11 @@ toStr(val) {
   ; https://docs.microsoft.com/windows/desktop/api/Winuser/nf-winuser-getmenuitemcount
   _menuObjGetItemCount(menuObj) {
     return dllCall("GetMenuItemCount", "Ptr", menuObj.handle)
+  }
+
+  ; _menuObjGetItemCount() is identical to this,
+  ; this function is really just for explicity
+  _menubarObjGetMenuCount(menubarObj) {
+    return dllCall("GetMenuItemCount", "Ptr", menubarObj.handle)
   }
 }
