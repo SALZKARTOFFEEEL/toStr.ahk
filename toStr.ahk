@@ -26,6 +26,9 @@ toStr(val) {
     if (type(val) == "Menu") {
       return "'Menu Object' with <" _menuObjGetItemCount(val) "> items"
     }
+
+
+    return "Object of type <" type(val) ">"
   }
   else if (type(val) == "Integer") {
     return format("{:i}", val)
