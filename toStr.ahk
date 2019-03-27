@@ -32,6 +32,9 @@ toStr(val) {
     if (type(val) == "ComObj") {
       return "'Com Object'"
     }
+    if (type(val) == "RegExMatch") {
+      return "'RegEx Match Object' matching: " toStr(_matchObjGetSubpatterns(val))
+    }
 
 
     ; following parts should be kept at the end of this function,
@@ -133,5 +136,13 @@ toStr(val) {
   ; this function is really just for explicity
   _menubarObjGetMenuCount(menubarObj) {
     return dllCall("GetMenuItemCount", "Ptr", menubarObj.handle)
+  }
+
+  _matchObjGetSubpatterns(matchObj) {
+    groups := {0: matchObj.0}
+    loop matchObj.count() {
+      groups[A_Index] := matchObj[A_Index]
+    }
+    return groups
   }
 }

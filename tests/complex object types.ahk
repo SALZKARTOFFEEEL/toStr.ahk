@@ -1,4 +1,4 @@
-﻿#include %A_ScriptDir%\..
+#include %A_ScriptDir%\..
 #include toStr.ahk
 
 ; this function writes its inputs to StdOut *while applying toStr()*:
@@ -22,3 +22,5 @@ menubar := menubarCreate(), menubar.add("abc", () =>)
 output(menubar)
 output(gui._NewEnum())
 output(comObjCreate("Scripting.Dictionary"))
+regexMatch("this is a test string! test test test", "(this)\s*(.+)!", match)
+output(match)
