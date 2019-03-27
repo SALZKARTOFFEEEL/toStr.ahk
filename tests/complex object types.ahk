@@ -24,3 +24,5 @@ output(gui._NewEnum())
 output(comObjCreate("Scripting.Dictionary"))
 regexMatch("this is a test string! test test test", "(this)\s*(.+)!", match)
 output(match)
+
+output(exception("blablabla")) ; prove that there is no such thing as an exception object :(
